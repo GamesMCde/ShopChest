@@ -13,7 +13,6 @@ import com.plotsquared.core.plot.flag.GlobalFlagContainer;
 import com.plotsquared.core.plot.flag.PlotFlag;
 
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import de.epiceric.shopchest.ShopChest;
 
@@ -79,7 +78,7 @@ public class PlotSquaredShopFlag {
         }
 
         @Override
-        protected CreateShopFlag flagOf(@NotNull Group value) {
+        protected CreateShopFlag flagOf( Group value) {
             return new CreateShopFlag(value);
         }
     }
@@ -90,7 +89,7 @@ public class PlotSquaredShopFlag {
         }
 
         @Override
-        protected UseShopFlag flagOf(@NotNull Group value) {
+        protected UseShopFlag flagOf(Group value) {
             return new UseShopFlag(value);
         }
     }
@@ -111,12 +110,12 @@ public class PlotSquaredShopFlag {
         }
 
         @Override
-        public F merge(@NotNull Group newValue) {
+        public F merge(Group newValue) {
             return flagOf(newValue);
         }
 
         @Override
-        public F parse(@NotNull String input) throws FlagParseException {
+        public F parse(String input) throws FlagParseException {
             switch (input.toLowerCase(Locale.ENGLISH)) {
                 case "owners":
                 case "owner":

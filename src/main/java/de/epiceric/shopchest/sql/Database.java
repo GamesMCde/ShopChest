@@ -279,6 +279,11 @@ public abstract class Database {
                     if (update()) {
                         plugin.getLogger().info("Updating database finished");
                     }
+                }
+                catch(Exception e) {
+                    //Empty catch
+                }
+                try(Connection con = dataSource.getConnection()){
 
                     // Create shop table
                     try (Statement s = con.createStatement()) {
