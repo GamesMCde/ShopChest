@@ -89,7 +89,7 @@
         </repository>
         <repository>
             <id>plotsquared-repo</id>
-            <url>https://mvn.intellectualsites.com/content/groups/public/</url>
+            <url>https://plotsquared.com/mvn/</url>
         </repository>
     </repositories>
 
@@ -97,7 +97,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.3-R0.1-SNAPSHOT</version>
+            <version>1.16.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -112,11 +112,11 @@
             <version>5.4.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- PlotSquared Core API -->
         <dependency>
             <groupId>com.plotsquared</groupId>
-            <artifactId>PlotSquared-Core</artifactId>
-            <version>5.13.3</version>
+            <artifactId>PlotSquared</artifactId>
+            <version>5.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.rlf</groupId>
@@ -245,6 +245,21 @@
                     <execution>
                         <goals>
                             <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <doclint>none</doclint>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
