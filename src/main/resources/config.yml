@@ -15,6 +15,10 @@ main-command-name: "shop"
 # (without the '.lang' extension).
 language-file: "en_US"
 
+# The multiplicator all incomes are multiplicated with.
+# So 0.6 means a tax rate of 40% (1-0.6=0.4)
+afterTax: 0.6
+
 # Set the item with which a player can click a shop to retrieve information.
 # You can set this to an empty string ("") to disable this feature.
 shop-info-item: "STICK"

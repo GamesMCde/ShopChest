@@ -313,6 +313,11 @@ public class Config {
      */
     public static LanguageConfiguration langConfig;
 
+    /**
+     * The multiplicator to apply taxes
+     */
+    public static Double afterTax;
+
     private ShopChest plugin;
 
     public Config(ShopChest plugin) {
@@ -475,6 +480,7 @@ public class Config {
         blacklist = (plugin.getConfig().getStringList("blacklist") == null) ? new ArrayList<String>() : plugin.getConfig().getStringList("blacklist");
         buyGreaterOrEqualSell = plugin.getConfig().getBoolean("buy-greater-or-equal-sell");
         confirmShopping = plugin.getConfig().getBoolean("confirm-shopping");
+        afterTax = plugin.getConfig().getDouble("afterTax");
         refundShopCreation = plugin.getConfig().getBoolean("refund-shop-creation");
         enableUpdateChecker = plugin.getConfig().getBoolean("enable-update-checker");
         enableDebugLog = plugin.getConfig().getBoolean("enable-debug-log");

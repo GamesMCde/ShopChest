@@ -794,7 +794,7 @@ public class ShopInteractListener implements Listener {
                 EconomyResponse r = econ.withdrawPlayer(executor, worldName, newPrice);
 
                 if (r.transactionSuccess()) {
-                    EconomyResponse r2 = (shop.getShopType() != ShopType.ADMIN) ? econ.depositPlayer(shop.getVendor(), worldName, newPrice) : null;
+                    EconomyResponse r2 = (shop.getShopType() != ShopType.ADMIN) ? econ.depositPlayer(shop.getVendor(), worldName, newPrice*Config.afterTax) : null;
 
                     if (r2 != null) {
                         if (r2.transactionSuccess()) {
@@ -803,7 +803,7 @@ public class ShopInteractListener implements Listener {
 
                             if (event.isCancelled()) {
                                 econ.depositPlayer(executor, worldName, newPrice);
-                                econ.withdrawPlayer(shop.getVendor(), worldName, newPrice);
+                                econ.withdrawPlayer(shop.getVendor(), worldName, newPrice*Config.afterTax);
                                 plugin.debug("Buy event cancelled (#" + shop.getID() + ")");
                                 return;
                             }
@@ -844,7 +844,7 @@ public class ShopInteractListener implements Listener {
                         } else {
                             plugin.debug("Economy transaction failed (r2): " + r2.errorMessage + " (#" + shop.getID() + ")");
                             executor.sendMessage(LanguageUtils.getMessage(Message.ERROR_OCCURRED, new Replacement(Placeholder.ERROR, r2.errorMessage)));
-                            econ.withdrawPlayer(shop.getVendor(), worldName, newPrice);
+                            econ.withdrawPlayer(shop.getVendor(), worldName, newPrice*Config.afterTax);
                             econ.depositPlayer(executor, worldName, newPrice);
                         }
                     } else {
@@ -962,7 +962,7 @@ public class ShopInteractListener implements Listener {
                 EconomyResponse r = econ.depositPlayer(executor, worldName, newPrice);
 
                 if (r.transactionSuccess()) {
-                    EconomyResponse r2 = (shop.getShopType() != ShopType.ADMIN) ? econ.withdrawPlayer(shop.getVendor(), worldName, newPrice) : null;
+                    EconomyResponse r2 = (shop.getShopType() != ShopType.ADMIN) ? econ.withdrawPlayer(shop.getVendor(), worldName, newPrice*Config.afterTax) : null;
 
                     if (r2 != null) {
                         if (r2.transactionSuccess()) {
@@ -971,7 +971,7 @@ public class ShopInteractListener implements Listener {
 
                             if (event.isCancelled()) {
                                 econ.withdrawPlayer(executor, worldName, newPrice);
-                                econ.depositPlayer(shop.getVendor(), worldName, newPrice);
+                                econ.depositPlayer(shop.getVendor(), worldName, newPrice*Config.afterTax);
                                 plugin.debug("Sell event cancelled (#" + shop.getID() + ")");
                                 return;
                             }
@@ -1012,7 +1012,7 @@ public class ShopInteractListener implements Listener {
                         } else {
                             plugin.debug("Economy transaction failed (r2): " + r2.errorMessage + " (#" + shop.getID() + ")");
                             executor.sendMessage(LanguageUtils.getMessage(Message.ERROR_OCCURRED, new Replacement(Placeholder.ERROR, r2.errorMessage)));
-                            econ.withdrawPlayer(executor, worldName, newPrice);
+                            econ.withdrawPlayer(executor, worldName, newPrice*Config.afterTax);
                             econ.depositPlayer(shop.getVendor(), worldName, newPrice);
                         }
 
@@ -1021,7 +1021,7 @@ public class ShopInteractListener implements Listener {
                         Bukkit.getPluginManager().callEvent(event);
 
                         if (event.isCancelled()) {
-                            econ.withdrawPlayer(executor, worldName, newPrice);
+                            econ.withdrawPlayer(executor, worldName, newPrice*Config.afterTax);
                             plugin.debug("Sell event cancelled (#" + shop.getID() + ")");
                             return;
                         }
