@@ -120,7 +120,7 @@ public class ShopInteractListener implements Listener {
         if (!(ClickType.getPlayerClickType(p) instanceof CreateClickType))
             return;
 
-        if (b.getType() != Material.CHEST && b.getType() != Material.TRAPPED_CHEST)
+        if (!Utils.isChest(b.getType()))
             return;
 
         if (ClickType.getPlayerClickType(p).getClickType() != ClickType.EnumClickType.CREATE)
@@ -165,7 +165,7 @@ public class ShopInteractListener implements Listener {
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getAction() != Action.LEFT_CLICK_BLOCK)
             return;
         
-        if (b.getType() != Material.CHEST && b.getType() != Material.TRAPPED_CHEST)
+        if (!Utils.isChest(b.getType()))
             return;
         
         ClickType clickType = ClickType.getPlayerClickType(p);

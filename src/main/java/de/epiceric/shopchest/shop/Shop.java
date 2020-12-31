@@ -113,7 +113,7 @@ public class Shop {
         plugin.debug("Creating shop (#" + id + ")");
 
         Block b = location.getBlock();
-        if (b.getType() != Material.CHEST && b.getType() != Material.TRAPPED_CHEST) {
+        if (!Utils.isChest(b.getType())) {
             ChestNotFoundException ex = new ChestNotFoundException(String.format("No Chest found in world '%s' at location: %d; %d; %d",
                     b.getWorld().getName(), b.getX(), b.getY(), b.getZ()));
             plugin.getShopUtils().removeShop(this, Config.removeShopOnError);
@@ -469,7 +469,7 @@ public class Shop {
     public InventoryHolder getInventoryHolder() {
         Block b = getLocation().getBlock();
 
-        if (b.getType() == Material.CHEST || b.getType() == Material.TRAPPED_CHEST) {
+        if (Utils.isChest(b.getType())) {
             Chest chest = (Chest) b.getState();
             return chest.getInventory().getHolder();
         }

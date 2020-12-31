@@ -648,5 +648,17 @@ public class Utils {
         return config.getItemStack("i", null);
     }
 
+    public static boolean isChest(Material mat)
+    {
+        switch (mat)
+        {
+            case CHEST:
+            case TRAPPED_CHEST:
+            case BARREL:
+                return true;
+            default:
+                return false;
+        }
+    }
 
 }
