@@ -17,10 +17,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.Chest;
-import org.bukkit.block.DoubleChest;
+import org.bukkit.block.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -87,13 +84,13 @@ public class ShopInteractListener implements Listener {
 
         Inventory chestInv = e.getInventory();
 
-        if (!(chestInv.getHolder() instanceof Chest || chestInv.getHolder() instanceof DoubleChest)) {
+        if (!(chestInv.getHolder() instanceof Chest || chestInv.getHolder() instanceof DoubleChest || chestInv.getHolder() instanceof Barrel)) {
             return;
         }
 
         Location loc = null;
-        if (chestInv.getHolder() instanceof Chest) {
-            loc = ((Chest) chestInv.getHolder()).getLocation();
+        if (chestInv.getHolder() instanceof Chest || chestInv.getHolder() instanceof Barrel) {
+            loc = ((Container) chestInv.getHolder()).getLocation();
         } else if (chestInv.getHolder() instanceof DoubleChest) {
             loc = ((DoubleChest) chestInv.getHolder()).getLocation();
         }
@@ -302,7 +299,7 @@ public class ShopInteractListener implements Listener {
                                 }
                             } else {
                                 if (externalPluginsAllowed || p.hasPermission(Permissions.BYPASS_EXTERNAL_PLUGIN)) {
-                                    Chest c = (Chest) b.getState();
+                                    Container c = (Container) b.getState();
                                     ItemStack itemStack = shop.getProduct().getItemStack();
                                     int amount = (p.isSneaking() ? itemStack.getMaxStackSize() : shop.getProduct().getAmount());
 
@@ -606,7 +603,7 @@ public class ShopInteractListener implements Listener {
             return;
         }
 
-        Chest c = (Chest) shop.getLocation().getBlock().getState();
+        Container c = (Container) shop.getLocation().getBlock().getState();
         ItemStack itemStack = shop.getProduct().getItemStack();
         int amount = Utils.getAmount(c.getInventory(), itemStack);
         int space = Utils.getFreeSpaceForItem(c.getInventory(), itemStack);
@@ -753,7 +750,7 @@ public class ShopInteractListener implements Listener {
             plugin.debug(executor.getName() + " has enough money for " + amountForMoney + " item(s) (#" + shop.getID() + ")");
 
             Block b = shop.getLocation().getBlock();
-            Chest c = (Chest) b.getState();
+            Container c = (Container) b.getState();
 
             int amountForChestItems = Utils.getAmount(c.getInventory(), itemStack);
 
@@ -921,7 +918,7 @@ public class ShopInteractListener implements Listener {
             }
 
             Block block = shop.getLocation().getBlock();
-            Chest chest = (Chest) block.getState();
+            Container chest = (Container) block.getState();
 
             int amountForItemCount = Utils.getAmount(executor.getInventory(), itemStack);
 

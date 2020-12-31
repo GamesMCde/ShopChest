@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.Chest;
-import org.bukkit.block.DoubleChest;
+import org.bukkit.block.*;
 import org.bukkit.block.data.type.Chest.Type;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -138,7 +135,7 @@ public class ChestProtectListener implements Listener {
             return;
         }
         
-        Chest c = (Chest) b.getState();
+        Container c = (Container) b.getState();
         Block b2;
 
         // Can't use Utils::getChestLocations since inventory holder
@@ -237,8 +234,8 @@ public class ChestProtectListener implements Listener {
 
                 if (shopUtils.isShop(r.getLocation()) || shopUtils.isShop(l.getLocation())) e.setCancelled(true);
 
-            } else if (e.getSource().getHolder() instanceof Chest) {
-                Chest c = (Chest) e.getSource().getHolder();
+            } else if (e.getSource().getHolder() instanceof Chest || e.getSource().getHolder() instanceof Barrel) {
+                Container c = (Container) e.getSource().getHolder();
 
                 if (shopUtils.isShop(c.getLocation())) e.setCancelled(true);
             }
