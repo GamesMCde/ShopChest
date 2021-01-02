@@ -157,7 +157,12 @@ public class ChestProtectListener implements Listener {
                 b2 = l.getBlock();
             }
         } else {
+
+            if(b.getType().equals(Material.BARREL))
+                return;
+
             org.bukkit.block.data.type.Chest data = (org.bukkit.block.data.type.Chest) c.getBlockData();
+
 
             if (data.getType() == Type.SINGLE) {
                 return;
